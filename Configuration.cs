@@ -3,7 +3,7 @@ using Dalamud.Plugin;
 using Newtonsoft.Json;
 using System;
 
-namespace OBSPlugin
+namespace OBSPluginX
 {
     public class Configuration : IPluginConfiguration
     {

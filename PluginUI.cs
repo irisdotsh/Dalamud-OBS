@@ -3,7 +3,7 @@ using Dalamud.Logging;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 using ImGuiNET;
 using Newtonsoft.Json.Linq;
-using OBSPlugin.Objects;
+using OBSPluginX.Objects;
 using OBSWebsocketDotNet;
 using OBSWebsocketDotNet.Types;
 using System;
@@ -18,7 +18,7 @@ using System.IO;
 using Dalamud.Plugin.Services;
 using System.Threading;
 
-namespace OBSPlugin
+namespace OBSPluginX
 {
     public class PluginUI
     {
@@ -110,7 +110,7 @@ namespace OBSPlugin
 
             ImGui.SetNextWindowSize(new Vector2(530, 450), ImGuiCond.FirstUseEver);
             bool configOpen = IsVisible;
-            if (ImGui.Begin("OBS Plugin Config", ref configOpen))
+            if (ImGui.Begin("OBSPluginX Config", ref configOpen))
             {
                 IsVisible = configOpen;
                 if (ImGui.BeginTabBar("TabBar"))
@@ -246,7 +246,7 @@ namespace OBSPlugin
                     Config.UIDetection = false;
                     var errMsg = $"Cannot find source \"{Config.SourceName}\", please check.";
                     Plugin.PluginLog.Error(errMsg);
-                    Plugin.Chat.PrintError($"[OBSPlugin] {errMsg}");
+                    Plugin.Chat.PrintError($"[OBSPluginX] {errMsg}");
                     Config.Save();
                 }
                 return false;
@@ -410,7 +410,7 @@ namespace OBSPlugin
                 var errMsg = "More than 1000 UI errors encountered, UI detection is turned off. " +
                     "Please open /xllog for more details.";
                 Plugin.PluginLog.Error(errMsg);
-                Plugin.Chat.PrintError($"[OBSPlugin] {errMsg}");
+                Plugin.Chat.PrintError($"[OBSPluginX] {errMsg}");
                 Config.UIDetection = false;
                 Config.Save();
             }
@@ -1218,7 +1218,7 @@ namespace OBSPlugin
                 catch (Exception e)
                 {
                     Plugin.PluginLog.Error("Error on toggle streaming: {0}", e);
-                    Plugin.Chat.PrintError("[OBSPlugin] Error on toggle streaming, check log for details.");
+                    Plugin.Chat.PrintError("[OBSPluginX] Error on toggle streaming, check log for details.");
                 }
             }
 
@@ -1360,7 +1360,7 @@ namespace OBSPlugin
                 catch (Exception e)
                 {
                     Plugin.PluginLog.Error("Error on toggle recording: {0}", e);
-                    Plugin.Chat.PrintError("[OBSPlugin] Error on toggle recording, check log for details.");
+                    Plugin.Chat.PrintError("[OBSPluginX] Error on toggle recording, check log for details.");
                 }
             }
 
@@ -1474,7 +1474,7 @@ namespace OBSPlugin
                 catch (Exception e)
                 {
                     Plugin.PluginLog.Error("Error on toggle replay buffer: {0}", e);
-                    Plugin.Chat.PrintError("[OBSPlugin] Error on toggle replay buffer, check log for details.");
+                    Plugin.Chat.PrintError("[OBSPluginX] Error on toggle replay buffer, check log for details.");
                 }
             }
             ImGui.SameLine(ImGui.GetColumnWidth() - 80);
@@ -1541,7 +1541,7 @@ namespace OBSPlugin
                 catch (Exception e)
                 {
                     Plugin.PluginLog.Error("Error on save replay buffer: {0}", e);
-                    Plugin.Chat.PrintError("[OBSPlugin] Error on save replay buffer, check log for details.");
+                    Plugin.Chat.PrintError("[OBSPluginX] Error on save replay buffer, check log for details.");
                 }
             }
             if (Plugin.obsReplayBufferStatus != OutputState.OBS_WEBSOCKET_OUTPUT_STARTED)

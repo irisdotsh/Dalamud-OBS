@@ -1,5 +1,5 @@
 ﻿{
-  "Name": "OBSPlugin",
+  "Name": "OBSPluginX",
   "Author": "irisdotsh",
   "Punchline": "Control OBS by websocket",
   "Description": "A plugin to control OBS by WebSocket, streaming with any UI modification is not recommended.",

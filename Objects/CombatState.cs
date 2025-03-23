@@ -1,5 +1,5 @@
 ﻿using System;
-namespace OBSPlugin.Objects
+namespace OBSPluginX.Objects
 {
     // This class is from https://github.com/xorus/EngageTimer/blob/7a3d6eb/State.cs
     public class CombatState

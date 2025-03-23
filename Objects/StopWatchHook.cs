@@ -7,7 +7,7 @@ using Dalamud.Logging;
 using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
 
-namespace OBSPlugin.Objects
+namespace OBSPluginX.Objects
 {
     // This class is from https://github.com/xorus/EngageTimer/blob/7a3d6eb/StopWatchHook.cs
     public class StopWatchHook : IDisposable

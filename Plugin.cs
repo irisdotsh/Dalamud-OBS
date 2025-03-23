@@ -10,8 +10,8 @@ using Dalamud.Logging;
 using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
 using FFXIVClientStructs.FFXIV.Common.Lua;
-using OBSPlugin.Attributes;
-using OBSPlugin.Objects;
+using OBSPluginX.Attributes;
+using OBSPluginX.Objects;
 using OBSWebsocketDotNet;
 using OBSWebsocketDotNet.Communication;
 using OBSWebsocketDotNet.Types;
@@ -23,7 +23,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using static FFXIVClientStructs.FFXIV.Client.System.String.Utf8String.Delegates;
 
-namespace OBSPlugin
+namespace OBSPluginX
 {
     public class Plugin : IDalamudPlugin
     {
@@ -298,7 +298,7 @@ namespace OBSPlugin
             {
                 string errMsg = $"Invalid obs-websocket-plugin version, needs {minimumPluginVersion}, having {pluginVersion}";
                 PluginLog.Error(errMsg);
-                Chat.PrintError($"[OBSPlugin] {errMsg}");
+                Chat.PrintError($"[OBSPluginX] {errMsg}");
                 this.obs.Disconnect();
                 return;
             }
@@ -386,7 +386,7 @@ namespace OBSPlugin
         }
 
         [Command("/obs")]
-        [HelpMessage("Open OBSPlugin config panel.")]
+        [HelpMessage("Open OBSPluginX config panel.")]
         public unsafe void ObsCommand(string command, string args)
         {
             if (string.IsNullOrEmpty(args))
@@ -451,7 +451,7 @@ namespace OBSPlugin
                     break;
 
                 default:
-                    Chat.PrintError($"[OBSPlugin] {args} is not a valid command.");
+                    Chat.PrintError($"[OBSPluginX] {args} is not a valid command.");
                     break;
             }
         }
@@ -461,7 +461,7 @@ namespace OBSPlugin
         {
             if (string.IsNullOrWhiteSpace(args))
             {
-                Chat.PrintError("[OBSPlugin] Replay command requires a subcommand: 'start', 'save', or 'stop'.");
+                Chat.PrintError("[OBSPluginX] Replay command requires a subcommand: 'start', 'save', or 'stop'.");
                 return;
             }
 
@@ -471,11 +471,11 @@ namespace OBSPlugin
                     if (obsReplayBufferStatus != OutputState.OBS_WEBSOCKET_OUTPUT_STARTED)
                     {
                         obs.StartReplayBuffer();
-                        Chat.Print("[OBSPlugin] Started replay buffer.");
+                        Chat.Print("[OBSPluginX] Started replay buffer.");
                     }
                     else
                     {
-                        Chat.PrintError("[OBSPlugin] The replay buffer is already active.");
+                        Chat.PrintError("[OBSPluginX] The replay buffer is already active.");
                     }
                     break;
 
@@ -483,11 +483,11 @@ namespace OBSPlugin
                     if (obsReplayBufferStatus == OutputState.OBS_WEBSOCKET_OUTPUT_STARTED)
                     {
                         obs.SaveReplayBuffer();
-                        Chat.Print("[OBSPlugin] Replay saved: " + obs.GetLastReplayBufferReplay());
+                        Chat.Print("[OBSPluginX] Replay saved: " + obs.GetLastReplayBufferReplay());
                     }
                     else
                     {
-                        Chat.PrintError("[OBSPlugin] The replay buffer is not active.");
+                        Chat.PrintError("[OBSPluginX] The replay buffer is not active.");
                     }
                     break;
 
@@ -495,16 +495,16 @@ namespace OBSPlugin
                     if (obsReplayBufferStatus == OutputState.OBS_WEBSOCKET_OUTPUT_STARTED)
                     {
                         obs.StopReplayBuffer();
-                        Chat.Print("[OBSPlugin] Stopped replay buffer.");
+                        Chat.Print("[OBSPluginX] Stopped replay buffer.");
                     }
                     else
                     {
-                        Chat.PrintError("[OBSPlugin] The replay buffer is not active.");
+                        Chat.PrintError("[OBSPluginX] The replay buffer is not active.");
                     }
                     break;
 
                 default:
-                    Chat.PrintError($"[OBSPlugin] '{args}' is not a valid subcommand. Valid subcommands are 'start', 'save', or 'stop'.");
+                    Chat.PrintError($"[OBSPluginX] '{args}' is not a valid subcommand. Valid subcommands are 'start', 'save', or 'stop'.");
                     break;
             }
         }
@@ -514,7 +514,7 @@ namespace OBSPlugin
         {
             if (string.IsNullOrWhiteSpace(args))
             {
-                Chat.PrintError("[OBSPlugin] Stream command requires a subcommand: 'start' or 'stop'.");
+                Chat.PrintError("[OBSPluginX] Stream command requires a subcommand: 'start' or 'stop'.");
                 return;
             }
 
@@ -524,11 +524,11 @@ namespace OBSPlugin
                     if (!obs.GetStreamStatus().IsActive)
                     {
                         obs.StartStream();
-                        Chat.Print("[OBSPlugin] Started stream.");
+                        Chat.Print("[OBSPluginX] Started stream.");
                     }
                     else
                     {
-                        Chat.PrintError("[OBSPlugin] The stream is already active.");
+                        Chat.PrintError("[OBSPluginX] The stream is already active.");
                     }
                     break;
 
@@ -536,16 +536,16 @@ namespace OBSPlugin
                     if (obs.GetStreamStatus().IsActive)
                     {
                         obs.StopStream();
-                        Chat.Print("[OBSPlugin] Stopped stream.");
+                        Chat.Print("[OBSPluginX] Stopped stream.");
                     }
                     else
                     {
-                        Chat.PrintError("[OBSPlugin] The stream is not active.");
+                        Chat.PrintError("[OBSPluginX] The stream is not active.");
                     }
                     break;
 
                 default:
-                    Chat.PrintError($"[OBSPlugin] '{args}' is not a valid subcommand. Valid subcommands are 'start' or 'stop'.");
+                    Chat.PrintError($"[OBSPluginX] '{args}' is not a valid subcommand. Valid subcommands are 'start' or 'stop'.");
                     break;
             }
         }
@@ -555,7 +555,7 @@ namespace OBSPlugin
         {
             if (string.IsNullOrWhiteSpace(args))
             {
-                Chat.PrintError("[OBSPlugin] Record command requires a subcommand: 'start', 'stop', 'pause', or 'resume'.");
+                Chat.PrintError("[OBSPluginX] Record command requires a subcommand: 'start', 'stop', 'pause', or 'resume'.");
                 return;
             }
 
@@ -565,11 +565,11 @@ namespace OBSPlugin
                     if (!obs.GetRecordStatus().IsRecording)
                     {
                         obs.StartRecord();
-                        Chat.Print("[OBSPlugin] Started recording.");
+                        Chat.Print("[OBSPluginX] Started recording.");
                     }
                     else
                     {
-                        Chat.PrintError("[OBSPlugin] Recording is already active.");
+                        Chat.PrintError("[OBSPluginX] Recording is already active.");
                     }
                     break;
 
@@ -577,11 +577,11 @@ namespace OBSPlugin
                     if (obs.GetRecordStatus().IsRecording)
                     {
                         obs.StopRecord();
-                        Chat.Print("[OBSPlugin] Stopped recording.");
+                        Chat.Print("[OBSPluginX] Stopped recording.");
                     }
                     else
                     {
-                        Chat.PrintError("[OBSPlugin] Recording is not active.");
+                        Chat.PrintError("[OBSPluginX] Recording is not active.");
                     }
                     break;
 
@@ -589,15 +589,15 @@ namespace OBSPlugin
                     if (!obs.GetRecordStatus().IsRecordingPaused && obs.GetRecordStatus().IsRecording)
                     {
                         obs.PauseRecord();
-                        Chat.Print("[OBSPlugin] Paused recording.");
+                        Chat.Print("[OBSPluginX] Paused recording.");
                     }
                     else if (obs.GetRecordStatus().IsRecordingPaused)
                     {
-                        Chat.PrintError("[OBSPlugin] Recording is already paused.");
+                        Chat.PrintError("[OBSPluginX] Recording is already paused.");
                     }
                     else
                     {
-                        Chat.PrintError("[OBSPlugin] Cannot pause as recording is not active.");
+                        Chat.PrintError("[OBSPluginX] Cannot pause as recording is not active.");
                     }
                     break;
 
@@ -605,20 +605,20 @@ namespace OBSPlugin
                     if (obs.GetRecordStatus().IsRecordingPaused)
                     {
                         obs.ResumeRecord();
-                        Chat.Print("[OBSPlugin] Resumed recording.");
+                        Chat.Print("[OBSPluginX] Resumed recording.");
                     }
                     else if (!obs.GetRecordStatus().IsRecording)
                     {
-                        Chat.PrintError("[OBSPlugin] Cannot resume as recording is not active.");
+                        Chat.PrintError("[OBSPluginX] Cannot resume as recording is not active.");
                     }
                     else
                     {
-                        Chat.PrintError("[OBSPlugin] Recording is not paused.");
+                        Chat.PrintError("[OBSPluginX] Recording is not paused.");
                     }
                     break;
 
                 default:
-                    Chat.PrintError($"[OBSPlugin] '{args}' is not a valid subcommand. Valid subcommands are 'start', 'stop', 'pause', or 'resume'.");
+                    Chat.PrintError($"[OBSPluginX] '{args}' is not a valid subcommand. Valid subcommands are 'start', 'stop', 'pause', or 'resume'.");
                     break;
             }
         }
@@ -628,7 +628,7 @@ namespace OBSPlugin
         {
             if (string.IsNullOrWhiteSpace(args))
             {
-                Chat.PrintError("[OBSPlugin] Command requires a subcommand followed by an audio device name: 'mute <device_name>' or 'unmute <device_name>'.");
+                Chat.PrintError("[OBSPluginX] Command requires a subcommand followed by an audio device name: 'mute <device_name>' or 'unmute <device_name>'.");
                 return;
             }
 
@@ -647,7 +647,7 @@ namespace OBSPlugin
             {
                 if (string.IsNullOrWhiteSpace(systemName))
                 {
-                    Chat.PrintError("[OBSPlugin] Audio commands need an audio device name to function.");
+                    Chat.PrintError("[OBSPluginX] Audio commands need an audio device name to function.");
                     return;
                 }
 
@@ -655,18 +655,18 @@ namespace OBSPlugin
                 {
                     case "mute":
                         obs.SetInputMute(systemName, true);
-                        Chat.Print($"[OBSPlugin] Muted {systemName}.");
+                        Chat.Print($"[OBSPluginX] Muted {systemName}.");
                         break;
 
                     case "unmute":
                         obs.SetInputMute(systemName, false);
-                        Chat.Print($"[OBSPlugin] Unmuted {systemName}.");
+                        Chat.Print($"[OBSPluginX] Unmuted {systemName}.");
                         break;
                 }
             }
             else
             {
-                Chat.PrintError("[OBSPlugin] Valid commands are 'mute <device_name>' and 'unmute <device_name>'.");
+                Chat.PrintError("[OBSPluginX] Valid commands are 'mute <device_name>' and 'unmute <device_name>'.");
             }
         }
 
@@ -679,7 +679,7 @@ namespace OBSPlugin
 
             if (firstSpaceIndex == -1)
             {
-                Chat.PrintError("[OBSPlugin] Valid subcommand is 'change <scene_name>'");
+                Chat.PrintError("[OBSPluginX] Valid subcommand is 'change <scene_name>'");
                 return;
             }
 
@@ -688,18 +688,18 @@ namespace OBSPlugin
 
             if (!command.Equals(changeKeyword))
             {
-                Chat.PrintError("[OBSPlugin] Valid subcommand is 'change <scene_name>'");
+                Chat.PrintError("[OBSPluginX] Valid subcommand is 'change <scene_name>'");
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(sceneName))
             {
-                Chat.PrintError("[OBSPlugin] Please provide a scene name to change to.");
+                Chat.PrintError("[OBSPluginX] Please provide a scene name to change to.");
                 return;
             }
 
             obs.SetCurrentProgramScene(sceneName);
-            Chat.Print($"[OBSPlugin] Scene changed to {sceneName}.");
+            Chat.Print($"[OBSPluginX] Scene changed to {sceneName}.");
         }
 
         internal void onTerritoryChanged(ushort tid)

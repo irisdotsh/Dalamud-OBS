@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OBSPlugin
+namespace OBSPluginX
 {
     [AttributeUsage(AttributeTargets.Method)]
     public class DoNotShowInHelpAttribute : Attribute
