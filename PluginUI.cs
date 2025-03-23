@@ -1505,6 +1505,28 @@ namespace OBSPlugin
             if (ImGui.IsItemHovered())
                 ImGui.SetTooltip("Delay of \"Save Replay Buffer On Combat Over\" in seconds.");
 
+            if (ImGui.Checkbox("Upload replay to Discord via webhook", ref Config.UploadToDiscord))
+            {
+                Config.Save();
+            }
+
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip("Uploads latest replay to Discord via webhook.  Make sure replays start with Replay.");
+            }
+
+            ImGui.SameLine();
+
+            if (ImGui.InputText("Discord Webhook", ref Config.Webhook, 255))
+            {
+                Config.Save();
+            }
+
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip("Discord webhook URL.");
+            }
+
             if (Plugin.obsReplayBufferStatus != OutputState.OBS_WEBSOCKET_OUTPUT_STARTED)
             {
                 ImGui.BeginDisabled();

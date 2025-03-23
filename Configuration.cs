@@ -44,6 +44,9 @@ namespace OBSPlugin
         public bool ResetReplayBufferDirByTerritory = false;
         public bool SaveReplayBufferOnCombat = false;
         public int SaveReplayBufferOnCombatDelay = 0;
+        public bool UploadToDiscord = false;
+        public string Webhook = "";
+        public string LastReplayUploaded = "";
 
 
         public void Save()

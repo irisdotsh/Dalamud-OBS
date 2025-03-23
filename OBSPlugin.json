@@ -1,8 +1,8 @@
 ﻿{
   "Name": "OBSPlugin",
-  "Author": "Bluefissure",
+  "Author": "irisdotsh",
   "Punchline": "Control OBS by websocket",
   "Description": "A plugin to control OBS by WebSocket, streaming with any UI modification is not recommended.",
-  "RepoUrl": "https://github.com/Bluefissure/Dalamud-OBS",
+  "RepoUrl": "https://github.com/irisdotsh/Dalamud-OBS",
   "Tags": [ "OBS", "UI", "Util" ]
 }

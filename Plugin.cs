@@ -1,3 +1,4 @@
+using CSharpDiscordWebhook.NET.Discord;
 using Dalamud.Data;
 using Dalamud.Game;
 using Dalamud.Game.ClientState;
@@ -16,6 +17,8 @@ using OBSWebsocketDotNet.Communication;
 using OBSWebsocketDotNet.Types;
 using OBSWebsocketDotNet.Types.Events;
 using System;
+using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using static FFXIVClientStructs.FFXIV.Client.System.String.Utf8String.Delegates;
@@ -178,6 +181,35 @@ namespace OBSPlugin
                                 } while (delay > 0);
                                 PluginLog.Information("Auto save replay buffer");
                                 this.obs.SaveReplayBuffer();
+
+                                if (config.UploadToDiscord)
+                                {
+                                    Thread.Sleep(5000);
+
+                                    var replayDirectory = new DirectoryInfo(config.RecordDir);
+                                    var latestReplay = replayDirectory.GetFiles("Replay*", SearchOption.AllDirectories)
+                                        .OrderByDescending(replay => replay.LastWriteTime)
+                                        .First();
+
+                                    if (latestReplay != null && (config.LastReplayUploaded != latestReplay.FullName))
+                                    {
+                                        DiscordMessage message = new DiscordMessage();
+
+                                        message.Content = "New replay uploaded";
+                                        message.TTS = false;
+                                        message.Username = ClientState.LocalPlayer.Name.ToString();
+
+                                        DiscordWebhook hook = new DiscordWebhook();
+
+                                        hook.Uri = new Uri(config.Webhook);
+
+                                        hook.SendAsync(message, latestReplay);
+
+                                        PluginLog.Information($"Uploaded {latestReplay.FullName} to Discord via webhook {config.Webhook}");
+
+                                        config.LastReplayUploaded = latestReplay.FullName;
+                                    }
+                                }
                             }
                             catch (ErrorResponseException err)
                             {
