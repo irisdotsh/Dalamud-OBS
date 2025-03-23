@@ -25,4 +25,4 @@ Please upgrade to OBS 28+
 
 ## Installation
 
-You can enable the testing plugins in Dalamud settings.
+You can add my [repository](https://raw.githubusercontent.com/irisdotsh/DalamudPlugins/refs/heads/main/pluginmaster.json) in Dalamud.
