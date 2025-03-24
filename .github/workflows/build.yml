@@ -31,7 +31,11 @@ jobs:
             - name: Upload Build Artifact
               uses: actions/upload-artifact@v4
               with:
-                name: build.zip
+                name: build
                 path: |
-                    Dalamud-OBS/bin/Release/net8.0/OBSPlugin/latest.zip
-                    Dalamud-OBS/bin/Release/net8.0/OBSPlugin/OBSPlugin.json
+                    Dalamud-OBS/bin/Release/net8.0/OBSPluginX/latest.zip
+                    Dalamud-OBS/bin/Release/net8.0/OBSPluginX/OBSPluginX.json
+            - name: Create Release
+              uses: ncipollo/release-action@v1
+              with:
+                artifacts: "Dalamud-OBS/bin/Release/net8.0/OBSPlugin/latest.zip,Dalamud-OBS/bin/Release/net8.0/OBSPlugin/OBSPluginX.json"

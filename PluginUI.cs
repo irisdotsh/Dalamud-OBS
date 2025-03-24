@@ -151,6 +151,15 @@ namespace OBSPluginX
                         }
                         ImGui.EndTabItem();
                     }
+                    if (ImGui.BeginTabItem("ACT##Tab"))
+                    {
+                        if (ImGui.BeginChild("ACT##SettingsRegion"))
+                        {
+                            DrawACT();
+                            ImGui.EndChild();
+                        }
+                        ImGui.EndTabItem();
+                    }
                     if (ImGui.BeginTabItem("Blur##Tab"))
                     {
                         if (ImGui.BeginChild("Blur##SettingsRegion"))
@@ -1547,6 +1556,19 @@ namespace OBSPluginX
             if (Plugin.obsReplayBufferStatus != OutputState.OBS_WEBSOCKET_OUTPUT_STARTED)
             {
                 ImGui.EndDisabled();
+            }
+        }
+
+        public void DrawACT()
+        {
+            if (ImGui.Checkbox("End ACT encounter after combat is over", ref Config.EndEncounterAfterWipe))
+            {
+                Config.Save();
+            }
+
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip("Sends /echo end to chat after combat is over to end the ACT encounter.  This will line up with the recording and replay buffer.");
             }
         }
 

@@ -136,6 +136,17 @@ namespace OBSPluginX
                 }
                 else if (!this.state.InCombat)
                 {
+                    if (config.EndEncounterAfterWipe)
+                    {
+                        Chat.Print(new Dalamud.Game.Text.XivChatEntry()
+                        {
+                            Message = "end",
+                            Type = Dalamud.Game.Text.XivChatType.Echo
+                        });
+
+                        PluginLog.Information("Ended ACT encounter");
+                    }
+
                     if (config.StopRecordOnCombat)
                     {
                         new Task(() =>
@@ -195,7 +206,7 @@ namespace OBSPluginX
                                     {
                                         DiscordMessage message = new DiscordMessage();
 
-                                        message.Content = "New replay uploaded";
+                                        message.Content = latestReplay.Name;
                                         message.TTS = false;
                                         message.Username = ClientState.LocalPlayer.Name.ToString();
 
